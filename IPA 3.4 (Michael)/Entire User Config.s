@@ -27,26 +27,28 @@ ask_add:
 display_forfeit:
     db "The remaining percent has been put into forfeit hand chance"
 specify_conserve:
-    db "(Type 1 for Conservative)"
+    db "(Type 2 for Conservative)"
 specify_normal:
-    db "(Type 2 for Normal)"
+    db "(Type 1 for Normal)"
 specify_aggro:
     db "(Type 3 for Aggressive)"
 ask_difficulty:
     db "Choose a Difficulty:"
 specify_easy:
-    db "(Type 1 for Easy)"
+    db "(Type 2 for Easy)"
 specify_hard:
     db "(Type 3 for Hard)"
-funds:
-    dw [0xffff, 2]  ;full word for human & cpu funds
-num_decks:          
-    db 0xff         ; number 1-3 to describe # of decks
-difficulty:
-    db 0xff         ; number 1-3 to describe difficulty
-betting_mode:
-    db 0xff         ; number 1-3 to describe betting mode
-int_buffer:    ;*********** go to start address 100 to view this in memory ********
+funds:              ;a full word per human & cpu funds
+    dw [0xffff, 2]  
+num_decks:          ; number 1-3 to describe # of decks
+    db 0xff         
+difficulty:         ; number 1-3 to describe difficulty
+    db 0xff         ; 1 = normal, 2 = easy (computer start $ div by 2), 3 = hard (computer start $ mul by 2)
+betting_mode:       ; number 1-3 to describe betting mode (1=normal, 2=easy, 3=hard)
+    db 0xff         ; bet amount = user bet + (betting_mode * (user_bet / 10))
+                    ; except its addition for hard and subtraction for easy
+                    
+int_buffer:    ;*********** go to start address 250 to view this easily in memory ********
     db 0x05     ; Maximum amount of characters to read
     db 0x00     ; Actual value read after INT
     db [0x00, 0x05] ; Buffer of the right size  
