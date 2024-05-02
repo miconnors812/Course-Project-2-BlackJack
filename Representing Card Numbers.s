@@ -101,9 +101,19 @@ def string_print {
     
 start:
     ;bring in 2 random numbers, one ranging from 0-3 and another ranging from 0-12.
-    mov dh, 0x01     ;dh determines suit
+    mov dh, 0x01     ;dh determines suit    0 = spade, 1 = heart, 2 = diamond, 3 = club
     mov dl, 0x0b    ; dl determines card #
     call print_card
+    
+    mov dh, 0x00     ;dh determines suit
+    mov dl, 0x07    ; dl determines card #
+    call print_card
+    
+    mov dh, 0x04     ;dh determines suit
+    mov dl, 0x00    ; dl determines card #
+    call print_card
+    
+    jmp _exit_loop
     
 ; these just set bp to the respective string and set cx to its length
 _ace:
@@ -111,48 +121,56 @@ _ace:
     mov cx, 3
     call string_print
     call card_cont
+    ret
     
 _jack:
     mov bp, OFFSET jack
     mov cx, 4
     call string_print
     call card_cont
+    ret
     
 _queen:
     mov bp, OFFSET queen
     mov cx, 5
     call string_print
     call card_cont
+    ret
     
 _king:
     mov bp, OFFSET king
     mov cx, 4
     call string_print
     call card_cont
+    ret
     
 _spade:
     mov bp, OFFSET spade
     mov cx, 6
     call string_print
-    jmp _exit_loop
+    ;jmp _exit_loop
+    ret
     
 _heart:
     mov bp, OFFSET heart
     mov cx, 6
     call string_print
-    jmp _exit_loop
+    ;jmp _exit_loop
+    ret
     
 _diamond:
     mov bp, OFFSET diamond
     mov cx, 8
     call string_print
-    jmp _exit_loop
+    ;jmp _exit_loop
+    ret
     
 _club:
     mov bp, OFFSET club
     mov cx, 5
     call string_print
-    jmp _exit_loop 
-
+    ;jmp _exit_loop 
+    ret
 
 _exit_loop:
+    ;ret
