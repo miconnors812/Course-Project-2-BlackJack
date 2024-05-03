@@ -729,10 +729,10 @@ start:
     ; START                  |
     ;=========================
   
-    ;call draw_card
-    mov word stake, 0x64
-    mov byte betting_mode, 0x2
-    jmp _computer_bet
+    ;call draw_card         ; TESTING GAMEFLOW, COMMENT THESE LATER
+    ;mov word stake, 0x64
+    ;mov byte betting_mode, 0x2
+    ;jmp _computer_bet
 
     mov di, 0   ; for determining turns, 0 = human & 2 = computer
     call user_config
@@ -745,7 +745,7 @@ start:
     
     
     
-    call computer_cash
+    call computer_cash  ; get computer starting money
     
     ;call turn_loop
     
